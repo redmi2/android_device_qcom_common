@@ -569,7 +569,7 @@ PRODUCT_PACKAGES := \
     Browser \
     Calculator \
     Calendar \
-    Camera \
+    SnapdragonCamera \
     CellBroadcastReceiver \
     CertInstaller \
     DrmProvider \
