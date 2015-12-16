@@ -505,7 +505,7 @@ case "$target" in
 
         #Enable adaptive LMK and set vmpressure_file_min
         ProductName=`getprop ro.product.name`
-        if [ "$ProductName" == "msm8916_32" ] || [ "$ProductName" == "msm8916_32_LMT" ]; then
+        if [ "$ProductName" == "msm8916_32" ] || [ "$ProductName" == "2014811" ]; then
             echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
             echo 53059 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
         elif [ "$ProductName" == "msm8916_64" ] || [ "$ProductName" == "msm8916_64_LMT" ]; then

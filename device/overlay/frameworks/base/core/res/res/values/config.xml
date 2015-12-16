@@ -276,4 +276,13 @@
          of telephony base classes.-->
     <string name="telephony_plugin_lib_path" translatable="false">/system/framework/qti-telephony-common.jar</string>
 
+    <!-- Control the behavior when the user long presses the home button.
+            0 - Nothing
+            1 - Recent apps view in SystemUI
+            2 - Launch assist intent
+         This needs to match the constants in
+         policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+    -->
+    <integer name="config_longPressOnHomeBehavior">1</integer>
+
 </resources>

@@ -37,29 +37,6 @@ ALSA_HARDWARE += alsa.msm8610
 ALSA_HARDWARE += alsa.apq8084
 
 ALSA_UCM := snd_soc_msm
-ALSA_UCM += snd_soc_msm_2x
-ALSA_UCM += snd_soc_msm_2x_mpq
-ALSA_UCM += snd_soc_msm_2x_Fusion3
-ALSA_UCM += snd_soc_msm_Sitar
-ALSA_UCM += snd_soc_msm_auxpcm
-ALSA_UCM += snd_soc_msm_2x_auxpcm
-ALSA_UCM += snd_soc_msm_2x_mpq_auxpcm
-ALSA_UCM += snd_soc_msm_2x_Fusion3_auxpcm
-ALSA_UCM += snd_soc_msm_Sitar_auxpcm
-ALSA_UCM += snd_soc_msm_Taiko
-ALSA_UCM += snd_soc_msm_Taiko_CDP
-ALSA_UCM += snd_soc_msm_Taiko_Fluid
-ALSA_UCM += snd_soc_msm_Taiko_liquid
-ALSA_UCM += snd_soc_apq_Taiko_DB
-ALSA_UCM += snd_soc_msm_I2SFusion
-ALSA_UCM += snd_soc_msm_Tapan
-ALSA_UCM += snd_soc_msm_TapanLite
-ALSA_UCM += snd_soc_msm_Tapan_SKUF
-ALSA_UCM += snd_soc_msm_TapanLite_SKUF
-ALSA_UCM += snd_soc_msm_8x10_wcd
-ALSA_UCM += snd_soc_msm_8x10_wcd_skuab
-ALSA_UCM += snd_soc_msm_8x10_wcd_skuaa
-ALSA_UCM += snd_soc_msm_samarium_Tapan
 
 #ANGLE
 ANGLE := libangle
@@ -86,6 +63,7 @@ AUDIO_HARDWARE += audio.primary.mpq8092
 AUDIO_HARDWARE += audio.primary.msm8916
 AUDIO_HARDWARE += audio.primary.msm8909
 AUDIO_HARDWARE += audio.primary.msm8994
+AUDIO_HARDWARE += audiod
 #
 AUDIO_POLICY := audio_policy.mpq8064
 AUDIO_POLICY += audio_policy.apq8084
@@ -154,7 +132,7 @@ CURL += curl
 
 #CM
 CM := CMFileManager
-CM += Trebuchet
+CM += Launcher3
 CM += Eleven
 
 #DASH
@@ -200,7 +178,7 @@ GPS_HARDWARE += libloc_eng
 GPS_HARDWARE += libloc_api_v02
 
 #HDMID
-HDMID := hdmid
+#HDMID := hdmid
 
 #HOSTAPD
 HOSTAPD := hostapd
@@ -241,7 +219,7 @@ INIT += init.qcom.wifi.sh
 INIT += vold.fstab
 INIT += init.qcom.ril.path.sh
 INIT += init.qcom.usb.rc
-INIT += init.qcom.usb.sh
+####INIT += init.qcom.usb.sh
 INIT += usf_post_boot.sh
 INIT += init.qcom.efs.sync.sh
 INIT += ueventd.qcom.rc
@@ -272,36 +250,9 @@ IPTABLES += iptables
 KERNEL_TESTS := mm-audio-native-test
 
 #KEYPAD
-KEYPAD := ffa-keypad_qwerty.kcm
-KEYPAD += ffa-keypad_numeric.kcm
-KEYPAD += fluid-keypad_qwerty.kcm
-KEYPAD += fluid-keypad_numeric.kcm
-KEYPAD += surf_keypad_qwerty.kcm
-KEYPAD += surf_keypad_numeric.kcm
-KEYPAD += surf_keypad.kcm
-KEYPAD += 7k_ffa_keypad.kcm
-KEYPAD += 7x27a_kp.kcm
-KEYPAD += keypad_8960_qwerty.kcm
-KEYPAD += 7k_ffa_keypad.kl
-KEYPAD += 7k_handset.kl
-KEYPAD += 7x27a_kp.kl
-KEYPAD += 8660_handset.kl
-KEYPAD += atmel_mxt_ts.kl
-KEYPAD += synaptics_rmi4_i2c.kl
-KEYPAD += synaptics_dsx.kl
-KEYPAD += cyttsp-i2c.kl
-KEYPAD += ft5x06_ts.kl
-KEYPAD += ffa-keypad.kl
-KEYPAD += fluid-keypad.kl
+KEYPAD += msm8x16-hm2014811-snd-card_Button_Jack.kl
 KEYPAD += gpio-keys.kl
-KEYPAD += keypad_8960.kl
-KEYPAD += keypad_8960_liquid.kl
 KEYPAD += synaptics_rmi4_i2c.kl
-KEYPAD += msm_tma300_ts.kl
-KEYPAD += philips_remote_ir.kl
-KEYPAD += samsung_remote_ir.kl
-KEYPAD += surf_keypad.kl
-KEYPAD += ue_rf4ce_remote.kl
 
 #KS
 KS := ks
@@ -615,6 +566,7 @@ PRODUCT_PACKAGES := \
     DeskClock \
     AlarmProvider \
     Bluetooth \
+    Browser \
     Calculator \
     Calendar \
     Camera \
@@ -629,7 +581,6 @@ PRODUCT_PACKAGES := \
     Phone \
     Provision \
     Protips \
-    QuickSearchBox \
     Settings \
     Sync \
     SystemUI \
@@ -681,7 +632,6 @@ PRODUCT_PACKAGES += $(EXTENDEDMEDIA_EXT)
 PRODUCT_PACKAGES += $(FASTPOWERON)
 PRODUCT_PACKAGES += $(FM)
 PRODUCT_PACKAGES += $(GPS_HARDWARE)
-PRODUCT_PACKAGES += $(HDMID)
 PRODUCT_PACKAGES += $(HOSTAPD)
 PRODUCT_PACKAGES += $(I420CC)
 PRODUCT_PACKAGES += $(INIT)
@@ -732,6 +682,7 @@ PRODUCT_PACKAGES += $(VT_QTI_PERMISSIONS)
 PRODUCT_PACKAGES += $(IMS_SETTINGS)
 PRODUCT_PACKAGES += $(CRDA)
 PRODUCT_PACKAGES += $(WLAN)
+#PRODUCT_PACKAGES += $(HDMID)
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -779,6 +730,8 @@ PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml
 
 # Bluetooth configuration files
 #PRODUCT_COPY_FILES += \
@@ -800,9 +753,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    device/qcom/common/media/media_profiles.xml:system/etc/media_profiles.xml \
-    device/qcom/common/media/media_codecs.xml:system/etc/media_codecs.xml
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 # enable overlays to use our version of
 # source/resources etc.
@@ -825,7 +776,14 @@ $(call inherit-product, build/target/product/verity.mk)
 #skip boot jars check
 SKIP_BOOT_JARS_CHECK := true
 
-ifeq ($(TARGET_BUILD_VARIANT),user)
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES+= \
-    ro.adb.secure=1
-endif
+# Enable ADB for debugging
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+        ro.debuggable=1 \
+        ro.adb.secure=0 \
+        ro.allow.mock.location=0 \
+        persist.service.adb.enable=1 \
+        persist.service.debuggable=1 \
+        persist.sys.usb.config=mtp
+        
+ADDITIONAL_DEFAULT_PROPERTIES += \
+        ro.secure=0
