@@ -205,7 +205,7 @@ INIT += init.qti.ims.sh
 INIT += init.qcom.bt.sh
 INIT += hsic.control.bt.sh
 INIT += init.qcom.coex.sh
-INIT += init.qcom.fm.sh
+#INIT += init.qcom.fm.sh
 INIT += init.qcom.early_boot.sh
 INIT += init.qcom.post_boot.sh
 INIT += init.qcom.syspart_fixup.sh
@@ -590,7 +590,6 @@ PRODUCT_PACKAGES := \
     IM \
     VoiceDialer \
     FM2 \
-    FMRadio \
     FMRecord \
     VideoEditor
 
