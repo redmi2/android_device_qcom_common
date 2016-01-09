@@ -131,7 +131,7 @@ CURL := libcurl
 CURL += curl
 
 #CM
-CM := CMFileManager
+#CM := CMFileManager
 CM += Launcher3
 CM += Eleven
 
