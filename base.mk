@@ -250,7 +250,7 @@ IPTABLES += iptables
 KERNEL_TESTS := mm-audio-native-test
 
 #KEYPAD
-KEYPAD += msm8x16-hm2014811-snd-card_Button_Jack.kl
+KEYPAD += msm8x16-wt88047-snd-card_Button_Jack.kl
 KEYPAD += gpio-keys.kl
 KEYPAD += synaptics_rmi4_i2c.kl
 
