@@ -696,6 +696,9 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
 
+# Qcril configuration file
+PRODUCT_PACKAGES += qcril.db
+
 # Flatland
 PRODUCT_PACKAGES += flatland
 
@@ -708,9 +711,15 @@ PRODUCT_PACKAGES += vcard
 # tcmiface for tcm support
 PRODUCT_PACKAGES += tcmiface
 
+# healthd libaray expanded for mode charger
+PRODUCT_PACKAGES += libhealthd.msm
+
 #intialise PRODUCT_PACKAGES_DEBUG list for debug modules
 PRODUCT_PACKAGES_DEBUG := init.qcom.testscripts.sh
 
+# ITE tech firmware
+PRODUCT_PACKAGES += it7260_cfg_62011E01.bin
+PRODUCT_PACKAGES += it7260_fw_050D0014.bin
 
 PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \

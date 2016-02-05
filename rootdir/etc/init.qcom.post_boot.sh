@@ -612,8 +612,6 @@ case "$target" in
 
                 # HMP Task packing settings for 8939, 8929
                 echo 20 > /proc/sys/kernel/sched_small_task
-                echo 30 > /proc/sys/kernel/sched_mostly_idle_load
-                echo 3 > /proc/sys/kernel/sched_mostly_idle_nr_run
 
 		for devfreq_gov in /sys/class/devfreq/qcom,mincpubw*/governor
 		do
@@ -690,6 +688,17 @@ case "$target" in
                 echo 30 > /sys/devices/system/cpu/cpu5/sched_mostly_idle_load
                 echo 30 > /sys/devices/system/cpu/cpu6/sched_mostly_idle_load
                 echo 30 > /sys/devices/system/cpu/cpu7/sched_mostly_idle_load
+
+                # cpu idle nr run threshold
+                echo 3 > /sys/devices/system/cpu/cpu0/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu1/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu2/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu3/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu4/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu5/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu6/sched_mostly_idle_nr_run
+                echo 3 > /sys/devices/system/cpu/cpu7/sched_mostly_idle_nr_run
+
             else
                 # Apply 3.0 specific Sched & Governor settings
                 # HMP scheduler settings for 8939 V3.0
@@ -1488,36 +1497,3 @@ case "$target" in
         echo $oem_version > /sys/devices/soc0/image_crm_version
         ;;
 esac
-
-# Create native cgroup and move all tasks to it. Allot 15% real-time
-# bandwidth limit to native cgroup (which is what remains after
-# Android uses up 80% real-time bandwidth limit). root cgroup should
-# become empty after all tasks are moved to native cgroup.
-
-CGROUP_ROOT=/dev/cpuctl
-mkdir $CGROUP_ROOT/native
-echo 150000 > $CGROUP_ROOT/native/cpu.rt_runtime_us
-
-# We could be racing with task creation, as a result of which its possible that
-# we may fail to move all tasks from root cgroup to native cgroup in one shot.
-# Retry few times before giving up.
-
-for loop_count in 1 2 3
-do
-	for i in $(cat $CGROUP_ROOT/tasks)
-	do
-		echo $i > $CGROUP_ROOT/native/tasks
-	done
-
-	root_tasks=$(cat $CGROUP_ROOT/tasks)
-	if [ -z "$root_tasks" ]
-	then
-		break
-	fi
-done
-
-# Check if we failed to move all tasks from root cgroup
-if [ ! -z "$root_tasks" ]
-then
-	echo "Error: Could not move all tasks to native cgroup"
-fi
