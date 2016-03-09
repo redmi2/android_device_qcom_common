@@ -543,6 +543,9 @@ VT_QTI_PERMISSIONS := qti_permissions.xml
 #IMS SETTINGS
 IMS_SETTINGS := imssettings
 
+#IMS Extension module for Android Telephony
+IMS_EXT := ims-ext-common
+
 #RCS
 RCS := rcs_service_aidl
 RCS += rcs_service_aidl.xml
@@ -681,7 +684,7 @@ PRODUCT_PACKAGES += $(VT_QTI_PERMISSIONS)
 PRODUCT_PACKAGES += $(IMS_SETTINGS)
 PRODUCT_PACKAGES += $(CRDA)
 PRODUCT_PACKAGES += $(WLAN)
-#PRODUCT_PACKAGES += $(HDMID)
+PRODUCT_PACKAGES += $(IMS_EXT)
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -695,6 +698,9 @@ PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
 
+# Qcril configuration file
+PRODUCT_PACKAGES += qcril.db
+
 # Flatland
 PRODUCT_PACKAGES += flatland
 
@@ -706,6 +712,9 @@ PRODUCT_PACKAGES += vcard
 
 # tcmiface for tcm support
 PRODUCT_PACKAGES += tcmiface
+
+# healthd libaray expanded for mode charger
+PRODUCT_PACKAGES += libhealthd.msm
 
 #intialise PRODUCT_PACKAGES_DEBUG list for debug modules
 PRODUCT_PACKAGES_DEBUG := init.qcom.testscripts.sh
@@ -729,11 +738,15 @@ PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml
+
+ifneq ($(TARGET_SUPPORTS_WEARABLES),true)
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+endif
 
 # Bluetooth configuration files
 #PRODUCT_COPY_FILES += \
