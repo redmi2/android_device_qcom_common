@@ -533,7 +533,7 @@ case "$target" in
                 echo 0 > /sys/module/msm_thermal/core_control/enabled
 		echo 1 > /sys/devices/system/cpu/cpu0/online
                 echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-                echo 800000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+                echo 400000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
                 # enable thermal core_control now
                 echo 1 > /sys/module/msm_thermal/core_control/enabled
 
@@ -1387,7 +1387,7 @@ case "$target" in
             setprop ro.min_freq_4 800000
 	;;
 	    "206" | "247" | "248" | "249" | "250" | "233" | "240" | "242")
-            setprop ro.min_freq_0 800000
+            setprop ro.min_freq_0 400000
         ;;
         esac
         #start perfd after setprop
