@@ -336,11 +336,11 @@ on property:persist.sys.ssr.enable_ramdumps=0
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
 
-on property:persist.radio.atfwd.start=false
-    stop atfwd
+#on property:persist.radio.atfwd.start=false
+#    stop atfwd
 
-on property:radio.atfwd.start=false
-    stop atfwd
+#on property:radio.atfwd.start=false
+#    stop atfwd
 
 service qcom-debug /system/bin/sh /system/etc/init.qcom.debug.sh
     class core
@@ -769,16 +769,15 @@ service config-zram /system/bin/sh /system/etc/init.qcom.zram.sh
    disabled
    oneshot
 
-service atfwd /system/bin/ATFWD-daemon
-    class late_start
-    user system
-    disabled
-    group system radio
+#service atfwd /system/bin/ATFWD-daemon
+#    class late_start
+#    user system
+#    disabled
+#    group system radio
 
 on property:sys.boot_completed=1
     start qcom-post-boot
     start config-zram
-    start atfwd
 
 service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
     class late_start
