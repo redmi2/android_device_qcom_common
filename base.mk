@@ -579,7 +579,7 @@ PRODUCT_PACKAGES := \
     Email \
     Gallery2 \
     LatinIME \
-    Mms \
+    messaging \
     Music \
     Phone \
     Provision \
