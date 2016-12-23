@@ -134,9 +134,10 @@ void init_alarm_boot_properties()
 {
     char const *alarm_file = "/proc/sys/kernel/boot_reason";
     char buf[BUF_SIZE];
-    char tmp[PROP_VALUE_MAX]="";
+    //char tmp[PROP_VALUE_MAX]="";
 
-    property_get("ro.boot.alarmboot", tmp);
+    //property_get("ro.boot.alarmboot", tmp);
+    std::string tmp = property_get("ro.boot.alarmboot");
 
     if(read_file2(alarm_file, buf, sizeof(buf))) {
 
@@ -155,7 +156,7 @@ void init_alarm_boot_properties()
      * 7 -> CBLPWR_N pin toggled (for external power supply)
      * 8 -> KPDPWR_N pin toggled (power key pressed)
      */
-        if(buf[0] == '3' || !strcmp(tmp,"true"))
+        if (buf[0] == '3' || tmp == "true")
             property_set("ro.alarm_boot", "true");
         else
             property_set("ro.alarm_boot", "false");
@@ -220,12 +221,15 @@ void set_display_node_perms()
 
 static int check_rlim_action()
 {
-    char pval[PROP_VALUE_MAX];
-    int rc;
+    //char pval[PROP_VALUE_MAX];
+    //int rc;
     struct rlimit rl;
-    rc = property_get("persist.debug.trace",pval);
+    //rc = property_get("persist.debug.trace",pval);
+    std::string pval = property_get("persist.debug.trace");
 
-    if(rc && (strcmp(pval,"1") == 0)) {
+
+    //if(rc && (strcmp(pval,"1") == 0)) {
+	if((strcmp(pval.c_str(),"1") == 0)) {
         rl.rlim_cur = RLIM_INFINITY;
         rl.rlim_max = RLIM_INFINITY;
         if (setrlimit(RLIMIT_CORE, &rl) < 0) {
