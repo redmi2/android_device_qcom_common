@@ -616,7 +616,7 @@ PRODUCT_PACKAGES := \
     SnapdragonMusic
    #SnapdragonLauncher \
 
-ifneq ($(TARGET_USES_AOSP),true)
+ifeq ($(TARGET_USES_AOSP),true)
 PRODUCT_PACKAGES += \
        BluetoothExt \
        BTTestApp \
