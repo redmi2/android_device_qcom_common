@@ -7,7 +7,9 @@ LIBINIT_USE_MSM_DEFAULT := $(shell if [ ! -f "$(LIBINIT_MSM_PATH)/init_$(TARGET_
 
 include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
-LOCAL_C_INCLUDES := system/core/init
+LOCAL_C_INCLUDES := \
+    system/core/base/include \
+    system/core/init
 LOCAL_CPPFLAGS := \
     -Wall \
     -Werror -Wno-error=deprecated-declarations \

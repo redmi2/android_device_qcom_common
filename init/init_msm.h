@@ -1,6 +1,5 @@
 /*
-   Copyright (c) 2013-2014, The Linux Foundation. All rights reserved.
-
+   Copyright (c) 2016, The CyanogenMod Project
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
    met:
@@ -13,7 +12,6 @@
     * Neither the name of The Linux Foundation nor the names of its
       contributors may be used to endorse or promote products derived
       from this software without specific prior written permission.
-
    THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
    WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
@@ -30,18 +28,6 @@
 #ifndef __INIT_MSM__H__
 #define __INIT_MSM__H__
 
-#include <sys/system_properties.h>
-
-#define PROP_HWROTATE    "ro.sf.hwrotation"
-#define PROP_LCDDENSITY  "ro.sf.lcd_density"
-#define PROP_QEMU_NAVKEY "qemu.hw.mainkeys"
-#define PROP_BOOT_BASEBAND "ro.boot.baseband"
-#define PROP_BLUETOOTH_SOC "qcom.bluetooth.soc"
-
-#define UNUSED(a)       ((void)(a))
-#define ISMATCH(a,b)    (!strncmp(a,b,PROP_VALUE_MAX))
-
-void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *board_type);
-int read_file2(const char *fname, char *data, int max_size);
+void init_target_properties();
 
 #endif /* __INIT_MSM__H__ */
