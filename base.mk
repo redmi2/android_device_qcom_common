@@ -237,6 +237,8 @@ INIT += init.qcom.debug.sh
 INIT += init.qti.memcheck.sh
 INIT += init.qti.synaptics_dsx_qhd.sh
 INIT += init.qcom.bms.sh
+INIT += init.spectrum.sh
+INIT += init.spectrum.rc
 
 #IPROUTE2
 IPROUTE2 := ip
