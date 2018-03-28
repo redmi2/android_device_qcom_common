@@ -3,12 +3,14 @@ $(call inherit-product, device/qcom/common/base.mk)
 # For PRODUCT_COPY_FILES, the first instance takes precedence.
 # Since we want use QC specific files, we should inherit
 # device-vendor.mk first to make sure QC specific files gets installed.
+$(call inherit-product-if-exists, vendor/xiaomi/wt88047/wt88047-vendor.mk)
 $(call inherit-product-if-exists, $(QCPATH)/common/config/device-vendor.mk)
 
 ifeq ($(TARGET_HAS_LOW_RAM),true)
     PRODUCT_PROPERTY_OVERRIDES += \
         keyguard.no_require_sim=true \
-        ro.com.android.dataroaming=true
+        ro.com.android.dataroaming=true \
+        persist.vendor.qcomsysd.enabled=0
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
@@ -16,6 +18,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/locales_full.mk)
 else
     $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
     $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+    PRODUCT_PROPERTY_OVERRIDES += \
+        persist.vendor.qcomsysd.enabled=1
 endif
 
 PRODUCT_BRAND := qcom
@@ -25,7 +29,7 @@ PRODUCT_MANUFACTURER := QUALCOMM
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so \
-    persist.vendor.radio.apm_sim_not_pwdn=1 \
+    persist.radio.apm_sim_not_pwdn=1 \
     persist.vendor.radio.custom_ecc=1 \
     persist.vendor.radio.sib16_support=1 \
     persist.vendor.radio.rat_on=combine \

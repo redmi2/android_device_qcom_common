@@ -29,11 +29,7 @@ QSD8K_BOARD_PLATFORMS := qsd8k
 TARGET_USE_VENDOR_CAMERA_EXT := true
 
 #List of targets that use video hw
-MSM_VIDC_TARGET_LIST := msm8974 msm8610 msm8226 apq8084 msm8916 msm8994 msm8909 msm8992 msm8996 msm8952 msm8937 msm8998 apq8098_latv sdm660 sdm845 msmpeafowl
-
-ifneq ($(TARGET_KERNEL_VERSION), 4.9)
-MSM_VIDC_TARGET_LIST += msm8953
-endif
+MSM_VIDC_TARGET_LIST := msm8974 msm8610 msm8226 apq8084 msm8916 msm8994 msm8909 msm8992 msm8996 msm8952 msm8937 msm8953 msm8998 apq8098_latv sdm660 sdm845 msmpeafowl
 
 #List of targets that use master side content protection
 MASTER_SIDE_CP_TARGET_LIST := msm8996 msm8998 sdm660 sdm845 apq8098_latv
@@ -52,29 +48,6 @@ ALSA_HARDWARE += alsa.msm8610
 ALSA_HARDWARE += alsa.apq8084
 
 ALSA_UCM := snd_soc_msm
-ALSA_UCM += snd_soc_msm_2x
-ALSA_UCM += snd_soc_msm_2x_mpq
-ALSA_UCM += snd_soc_msm_2x_Fusion3
-ALSA_UCM += snd_soc_msm_Sitar
-ALSA_UCM += snd_soc_msm_auxpcm
-ALSA_UCM += snd_soc_msm_2x_auxpcm
-ALSA_UCM += snd_soc_msm_2x_mpq_auxpcm
-ALSA_UCM += snd_soc_msm_2x_Fusion3_auxpcm
-ALSA_UCM += snd_soc_msm_Sitar_auxpcm
-ALSA_UCM += snd_soc_msm_Taiko
-ALSA_UCM += snd_soc_msm_Taiko_CDP
-ALSA_UCM += snd_soc_msm_Taiko_Fluid
-ALSA_UCM += snd_soc_msm_Taiko_liquid
-ALSA_UCM += snd_soc_apq_Taiko_DB
-ALSA_UCM += snd_soc_msm_I2SFusion
-ALSA_UCM += snd_soc_msm_Tapan
-ALSA_UCM += snd_soc_msm_TapanLite
-ALSA_UCM += snd_soc_msm_Tapan_SKUF
-ALSA_UCM += snd_soc_msm_TapanLite_SKUF
-ALSA_UCM += snd_soc_msm_8x10_wcd
-ALSA_UCM += snd_soc_msm_8x10_wcd_skuab
-ALSA_UCM += snd_soc_msm_8x10_wcd_skuaa
-ALSA_UCM += snd_soc_msm_samarium_Tapan
 
 #ANGLE
 ANGLE := libangle
@@ -111,6 +84,7 @@ AUDIO_HARDWARE += audio.primary.msm8998
 AUDIO_HARDWARE += audio.primary.sdm660
 AUDIO_HARDWARE += audio.primary.sdm845
 AUDIO_HARDWARE += audio.primary.apq8098_latv
+AUDIO_HARDWARE += audiod
 #
 AUDIO_POLICY := audio_policy.mpq8064
 AUDIO_POLICY += audio_policy.apq8084
@@ -219,11 +193,11 @@ EBTABLES += libebtc
 FASTPOWERON := FastBoot
 
 #FM
-FM := qcom.fmradio
-FM += libqcomfm_jni
-FM += libfmjni
-FM += fm_helium
-FM += libfm-hci
+#FM := qcom.fmradio
+#FM += libqcomfm_jni
+#FM += libfmjni
+#FM += fm_helium
+#FM += libfm-hci
 
 #GPS
 GPS_HARDWARE := gps.conf
@@ -238,7 +212,7 @@ GPS_HARDWARE += android.hardware.gnss@1.0-impl-qti
 GPS_HARDWARE += android.hardware.gnss@1.0-service-qti
 
 #HDMID
-HDMID := hdmid
+#HDMID := hdmid
 
 #HOSTAPD
 HOSTAPD := hostapd
@@ -277,8 +251,8 @@ INIT += init.qcom.wifi.sh
 INIT += vold.fstab
 INIT += init.qcom.ril.path.sh
 INIT += init.qcom.usb.rc
-INIT += init.msm.usb.configfs.rc
-INIT += init.qcom.usb.sh
+####INIT += init.msm.usb.configfs.rc
+####INIT += init.qcom.usb.sh
 INIT += usf_post_boot.sh
 INIT += init.qcom.efs.sync.sh
 INIT += ueventd.qcom.rc
@@ -291,7 +265,9 @@ INIT += init.qcom.sensors.sh
 INIT += init.qcom.crashdata.sh
 INIT += init.qcom.vendor.rc
 INIT += init.target.vendor.rc
-INIT += init.qti.fm.sh
+##INIT += init.qti.fm.sh
+INIT += init.spectrum.sh
+INIT += init.spectrum.rc
 
 #IPROUTE2
 IPROUTE2 := ip
@@ -342,7 +318,7 @@ KEYPAD += msm_tma300_ts.kl
 KEYPAD += philips_remote_ir.kl
 KEYPAD += samsung_remote_ir.kl
 KEYPAD += surf_keypad.kl
-KEYPAD += ue_rf4ce_remote.kl
+KEYPAD += msm8x16-wt88047-snd-card_Button_Jack.kl
 
 #KS
 KS := ks
@@ -842,7 +818,6 @@ PRODUCT_PACKAGES += $(EXTENDEDMEDIA_EXT)
 PRODUCT_PACKAGES += $(FASTPOWERON)
 PRODUCT_PACKAGES += $(FM)
 PRODUCT_PACKAGES += $(GPS_HARDWARE)
-PRODUCT_PACKAGES += $(HDMID)
 PRODUCT_PACKAGES += $(HOSTAPD)
 PRODUCT_PACKAGES += $(I420CC)
 PRODUCT_PACKAGES += $(INIT)
@@ -967,6 +942,9 @@ PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.sensor.compass.xml
+  
 
 
 # Bluetooth configuration files
@@ -989,15 +967,21 @@ PRODUCT_COPY_FILES += \
 #copy codecs_xxx.xml to (TARGET_COPY_OUT_VENDOR)/etc/
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
-    device/qcom/common/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles.xml \
-    device/qcom/common/media/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
 
 ifneq ($(TARGET_ENABLE_QC_AV_ENHANCEMENTS),true)
 PRODUCT_COPY_FILES += \
     device/qcom/common/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml
+endif
+
+ifeq ($(TARGET_PRODUCT),msm8909go)
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
+else
+PRODUCT_COPY_FILES += \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
 endif
 
 ifeq ($(strip $(TARGET_USES_NQ_NFC)),true)
@@ -1053,10 +1037,20 @@ endif
 #skip boot jars check
 SKIP_BOOT_JARS_CHECK := true
 
-ifeq ($(TARGET_BUILD_VARIANT),user)
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES+= \
-    ro.adb.secure=1
-endif
+#ifeq ($(TARGET_BUILD_VARIANT),user)
+#PRODUCT_DEFAULT_PROPERTY_OVERRIDES+= \
+#    ro.adb.secure=1
+#endif
+        
+# Enable ADB for debugging
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+        ro.secure=0 \
+        ro.debuggable=0 \
+        ro.adb.secure=0 \
+        ro.allow.mock.location=0 \
+        persist.service.adb.enable=1 \
+        persist.service.debuggable=1 \
+        persist.sys.usb.config=mtp
 
 #Camera QC extends API
 ifeq ($(strip $(TARGET_USES_QTIC_EXTENSION)),true)
