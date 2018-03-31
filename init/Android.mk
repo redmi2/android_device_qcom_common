@@ -13,6 +13,8 @@ LOCAL_C_INCLUDES := \
     external/selinux/libselinux/include
 LOCAL_CPPFLAGS := \
     -Wall \
+    -Werror -Wno-error=deprecated-declarations \
+    -Wno-unused-parameter \
     -DANDROID_TARGET=\"$(TARGET_BOARD_PLATFORM)\"
 LOCAL_SRC_FILES := init_msm.cpp
 ifeq ($(LIBINIT_USE_MSM_DEFAULT),true)
@@ -25,7 +27,6 @@ else
   endif
 endif
 LOCAL_MODULE := libinit_msm
-LOCAL_STATIC_LIBRARIES := libbase libselinux
 include $(BUILD_STATIC_LIBRARY)
 
 endif

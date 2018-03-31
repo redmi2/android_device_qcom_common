@@ -60,9 +60,9 @@ on post-fs-data
 # which cause the diag/Wwan/modem port all be lost in qmmi mode. Details:
 # UsbDeviceManager.java---->getDefaultFunctions and trySetEnabledFunctions
 
-    setprop persist.sys.usb.ffbm-00.func ${persist.sys.usb.config}
-    setprop persist.sys.usb.ffbm-01.func ${persist.sys.usb.config}
-    setprop persist.sys.usb.ffbm-02.func ${persist.sys.usb.config}
+#    setprop persist.sys.usb.ffbm-00.func ${persist.sys.usb.config}
+#    setprop persist.sys.usb.ffbm-01.func ${persist.sys.usb.config}
+#    setprop persist.sys.usb.ffbm-02.func ${persist.sys.usb.config}
 
 on mmi && property:ro.bootmode=ffbm-00
     # ========================================================

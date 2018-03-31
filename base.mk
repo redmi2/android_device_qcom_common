@@ -251,8 +251,8 @@ INIT += init.qcom.wifi.sh
 INIT += vold.fstab
 INIT += init.qcom.ril.path.sh
 INIT += init.qcom.usb.rc
-####INIT += init.msm.usb.configfs.rc
-####INIT += init.qcom.usb.sh
+##INIT += init.msm.usb.configfs.rc
+##INIT += init.qcom.usb.sh
 INIT += usf_post_boot.sh
 INIT += init.qcom.efs.sync.sh
 INIT += ueventd.qcom.rc
@@ -1041,11 +1041,11 @@ SKIP_BOOT_JARS_CHECK := true
 #PRODUCT_DEFAULT_PROPERTY_OVERRIDES+= \
 #    ro.adb.secure=1
 #endif
-        
+     
 # Enable ADB for debugging
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
         ro.secure=0 \
-        ro.debuggable=0 \
+        ro.debuggable=1 \
         ro.adb.secure=0 \
         ro.allow.mock.location=0 \
         persist.service.adb.enable=1 \
